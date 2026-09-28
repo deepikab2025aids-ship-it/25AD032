@@ -1,10 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stock Alert System</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                S
+            </div>
+
+            <div>
+                <h2>Stock Alert</h2>
+                <span>Inventory System</span>
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <button
+                    class="menu-item active"
+                    onclick="showSection('dashboard', this)">
+
+                <span>⌂</span>
+
+                Dashboard
+
+            </button>
+
+
+            <button
+                    class="menu-item"
+                    onclick="showSection('products', this)">
+
+                <span>▣</span>
+
+                Products
+
+            </button>
+
+
+            <button
+                    class="menu-item"
+                    onclick="showSection('movements', this)">
+
+                <span>↕</span>
+
+                Stock Movements
+
+            </button>
+
+
+            <button
+                    class="menu-item"
+                    onclick="showSection('alerts', this)">
+
+                <span>!</span>
+
+                Reorder Alerts
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <span>Retail Store</span>
+
+            <small>
+                Inventory Management
+            </small>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+                <p>
+                    Monitor your store inventory
+                </p>
+
+            </div>
+
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                System Online
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section
+                id="dashboard"
+                class="section">
+
+
+            <!-- Welcome -->
+
+            <div class="welcome">
+
+                <h2>
+                    Inventory Overview
+                </h2>
+
+                <p>
+                    Keep track of your products and stock levels.
+                </p>
+
+            </div>
+
+
+            <!-- Statistics -->
+
+            <div class="cards">
+
+
+                <!-- Products -->
+
+                <div class="card">
+
+                    <div class="card-icon product-icon">
+                        ▣
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Total Products
+                        </p>
+
+                        <h3 id="productCount">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Stock Movements -->
+
+                <div class="card">
+
+                    <div class="card-icon movement-icon">
+                        ↕
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Stock Movements
+                        </p>
+
+                        <h3 id="movementCount">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Reorder Alerts -->
+
+                <div class="card">
+
+                    <div class="card-icon alert-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Reorder Alerts
+                        </p>
+
+                        <h3 id="alertCount">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Quick Access -->
+
+            <div class="dashboard-box">
+
+                <div class="box-header">
+
+                    <h2>
+                        Quick Access
+                    </h2>
+
+                    <p>
+                        Manage your inventory efficiently.
+                    </p>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <button
+                            onclick="showSection('products')">
+
+                        <strong>
+                            Products
+                        </strong>
+
+                        <span>
+                            Manage products
+                        </span>
+
+                    </button>
+
+
+                    <button
+                            onclick="showSection('movements')">
+
+                        <strong>
+                            Stock Movements
+                        </strong>
+
+                        <span>
+                            Track stock changes
+                        </span>
+
+                    </button>
+
+
+                    <button
+                            onclick="showSection('alerts')">
+
+                        <strong>
+                            Reorder Alerts
+                        </strong>
+
+                        <span>
+                            Check low stock
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <section
+                id="products"
+                class="section hidden">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Products
+                    </h2>
+
+                    <p>
+                        View and manage store products.
+                    </p>
+
+                </div>
+
+
+                <button
+                        class="primary-btn"
+                        onclick="loadProducts()">
+
+                    View Products
+
+                </button>
+
+            </div>
+
+
+            <div class="data-box">
+
+                <div id="productList">
+
+                    <div class="empty">
+
+                        Click "View Products"
+                        to load product data.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STOCK MOVEMENTS ================= -->
+
+        <section
+                id="movements"
+                class="section hidden">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Stock Movements
+                    </h2>
+
+                    <p>
+                        Track incoming and outgoing stock.
+                    </p>
+
+                </div>
+
+
+                <button
+                        class="primary-btn"
+                        onclick="loadStockMovements()">
+
+                    View Movements
+
+                </button>
+
+            </div>
+
+
+            <div class="data-box">
+
+                <div id="movementList">
+
+                    <div class="empty">
+
+                        Click "View Movements"
+                        to load stock data.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= REORDER ALERTS ================= -->
+
+        <section
+                id="alerts"
+                class="section hidden">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Reorder Alerts
+                    </h2>
+
+                    <p>
+                        Monitor products that need restocking.
+                    </p>
+
+                </div>
+
+
+                <button
+                        class="primary-btn"
+                        onclick="loadReorderAlerts()">
+
+                    View Alerts
+
+                </button>
+
+            </div>
+
+
+            <div class="data-box">
+
+                <div id="alertList">
+
+                    <div class="empty">
+
+                        Click "View Alerts"
+                        to load alert data.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- JavaScript -->
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
