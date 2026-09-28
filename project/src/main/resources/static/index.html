@@ -2,12 +2,16 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Stock Alert System</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -39,7 +43,6 @@
                     onclick="showSection('dashboard', this)">
 
                 <span>⌂</span>
-
                 Dashboard
 
             </button>
@@ -50,7 +53,6 @@
                     onclick="showSection('products', this)">
 
                 <span>▣</span>
-
                 Products
 
             </button>
@@ -61,7 +63,6 @@
                     onclick="showSection('movements', this)">
 
                 <span>↕</span>
-
                 Stock Movements
 
             </button>
@@ -72,7 +73,6 @@
                     onclick="showSection('alerts', this)">
 
                 <span>!</span>
-
                 Reorder Alerts
 
             </button>
@@ -93,10 +93,9 @@
     </aside>
 
 
-    <!-- ================= MAIN CONTENT ================= -->
+    <!-- ================= MAIN ================= -->
 
     <main class="main">
-
 
         <!-- TOP BAR -->
 
@@ -108,7 +107,7 @@
                     Dashboard
                 </h1>
 
-                <p>
+                <p id="pageSubtitle">
                     Monitor your store inventory
                 </p>
 
@@ -132,9 +131,6 @@
                 id="dashboard"
                 class="section">
 
-
-            <!-- Welcome -->
-
             <div class="welcome">
 
                 <h2>
@@ -148,12 +144,7 @@
             </div>
 
 
-            <!-- Statistics -->
-
             <div class="cards">
-
-
-                <!-- Products -->
 
                 <div class="card">
 
@@ -176,8 +167,6 @@
                 </div>
 
 
-                <!-- Stock Movements -->
-
                 <div class="card">
 
                     <div class="card-icon movement-icon">
@@ -198,8 +187,6 @@
 
                 </div>
 
-
-                <!-- Reorder Alerts -->
 
                 <div class="card">
 
@@ -224,8 +211,6 @@
             </div>
 
 
-            <!-- Quick Access -->
-
             <div class="dashboard-box">
 
                 <div class="box-header">
@@ -243,23 +228,22 @@
 
                 <div class="quick-actions">
 
-
                     <button
-                            onclick="showSection('products')">
+                            onclick="goToSection('products')">
 
                         <strong>
                             Products
                         </strong>
 
                         <span>
-                            Manage products
+                            Add and manage products
                         </span>
 
                     </button>
 
 
                     <button
-                            onclick="showSection('movements')">
+                            onclick="goToSection('movements')">
 
                         <strong>
                             Stock Movements
@@ -273,18 +257,17 @@
 
 
                     <button
-                            onclick="showSection('alerts')">
+                            onclick="goToSection('alerts')">
 
                         <strong>
                             Reorder Alerts
                         </strong>
 
                         <span>
-                            Check low stock
+                            Manage low stock alerts
                         </span>
 
                     </button>
-
 
                 </div>
 
@@ -299,7 +282,6 @@
                 id="products"
                 class="section hidden">
 
-
             <div class="section-header">
 
                 <div>
@@ -309,7 +291,7 @@
                     </h2>
 
                     <p>
-                        View and manage store products.
+                        Add, view, update and delete products.
                     </p>
 
                 </div>
@@ -317,24 +299,137 @@
 
                 <button
                         class="primary-btn"
-                        onclick="loadProducts()">
+                        onclick="showProductForm()">
 
-                    View Products
+                    + Add Product
 
                 </button>
 
             </div>
 
 
+            <!-- PRODUCT FORM -->
+
+            <div
+                    id="productForm"
+                    class="form-box hidden">
+
+                <h3 id="productFormTitle">
+                    Add Product
+                </h3>
+
+                <p class="form-description">
+                    Enter the product details below.
+                </p>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Product Name
+                        </label>
+
+                        <input
+                                type="text"
+                                id="productName"
+                                placeholder="Enter product name">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            SKU
+                        </label>
+
+                        <input
+                                type="text"
+                                id="productSKU"
+                                placeholder="Enter SKU">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Description
+                        </label>
+
+                        <input
+                                type="text"
+                                id="productDescription"
+                                placeholder="Enter description">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Price
+                        </label>
+
+                        <input
+                                type="number"
+                                id="productPrice"
+                                placeholder="Enter price">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Reorder Threshold
+                        </label>
+
+                        <input
+                                type="number"
+                                id="productThreshold"
+                                placeholder="Enter reorder threshold">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                            class="primary-btn"
+                            id="productSaveButton"
+                            onclick="saveProduct()">
+
+                        Add Product
+
+                    </button>
+
+
+                    <button
+                            class="cancel-btn"
+                            onclick="hideProductForm()">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT TABLE -->
+
             <div class="data-box">
 
                 <div id="productList">
 
                     <div class="empty">
-
-                        Click "View Products"
-                        to load product data.
-
+                        Click "Add Product" or refresh to view products.
                     </div>
 
                 </div>
@@ -350,7 +445,6 @@
                 id="movements"
                 class="section hidden">
 
-
             <div class="section-header">
 
                 <div>
@@ -360,7 +454,7 @@
                     </h2>
 
                     <p>
-                        Track incoming and outgoing stock.
+                        Add, view, update and delete stock movements.
                     </p>
 
                 </div>
@@ -368,24 +462,122 @@
 
                 <button
                         class="primary-btn"
-                        onclick="loadStockMovements()">
+                        onclick="showMovementForm()">
 
-                    View Movements
+                    + Add Movement
 
                 </button>
 
             </div>
 
 
+            <!-- MOVEMENT FORM -->
+
+            <div
+                    id="movementForm"
+                    class="form-box hidden">
+
+                <h3 id="movementFormTitle">
+                    Add Stock Movement
+                </h3>
+
+                <p class="form-description">
+                    Enter the stock movement details.
+                </p>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Quantity
+                        </label>
+
+                        <input
+                                type="number"
+                                id="movementQuantity"
+                                placeholder="Enter quantity">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Reason
+                        </label>
+
+                        <input
+                                type="text"
+                                id="movementReason"
+                                placeholder="Example: Stock Added">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Movement Date
+                        </label>
+
+                        <input
+                                type="date"
+                                id="movementDate">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Product ID
+                        </label>
+
+                        <input
+                                type="number"
+                                id="movementProductId"
+                                placeholder="Enter product ID">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                            class="primary-btn"
+                            id="movementSaveButton"
+                            onclick="saveMovement()">
+
+                        Add Movement
+
+                    </button>
+
+
+                    <button
+                            class="cancel-btn"
+                            onclick="hideMovementForm()">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOVEMENT TABLE -->
+
             <div class="data-box">
 
                 <div id="movementList">
 
                     <div class="empty">
-
-                        Click "View Movements"
-                        to load stock data.
-
+                        Click "Add Movement" or refresh to view movements.
                     </div>
 
                 </div>
@@ -401,7 +593,6 @@
                 id="alerts"
                 class="section hidden">
 
-
             <div class="section-header">
 
                 <div>
@@ -411,7 +602,7 @@
                     </h2>
 
                     <p>
-                        Monitor products that need restocking.
+                        Add, view, update and delete reorder alerts.
                     </p>
 
                 </div>
@@ -419,24 +610,157 @@
 
                 <button
                         class="primary-btn"
-                        onclick="loadReorderAlerts()">
+                        onclick="showAlertForm()">
 
-                    View Alerts
+                    + Add Alert
 
                 </button>
 
             </div>
 
 
+            <!-- ALERT FORM -->
+
+            <div
+                    id="alertForm"
+                    class="form-box hidden">
+
+                <h3 id="alertFormTitle">
+                    Add Reorder Alert
+                </h3>
+
+                <p class="form-description">
+                    Enter the reorder alert details.
+                </p>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Current Stock
+                        </label>
+
+                        <input
+                                type="number"
+                                id="currentStock"
+                                placeholder="Enter current stock">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Reorder Threshold
+                        </label>
+
+                        <input
+                                type="number"
+                                id="reorderThreshold"
+                                placeholder="Enter threshold">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Message
+                        </label>
+
+                        <input
+                                type="text"
+                                id="alertMessage"
+                                placeholder="Enter alert message">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select id="alertStatus">
+
+                            <option value="ACTIVE">
+                                ACTIVE
+                            </option>
+
+                            <option value="INACTIVE">
+                                INACTIVE
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Alert Date
+                        </label>
+
+                        <input
+                                type="date"
+                                id="alertDate">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Product ID
+                        </label>
+
+                        <input
+                                type="number"
+                                id="alertProductId"
+                                placeholder="Enter product ID">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                            class="primary-btn"
+                            id="alertSaveButton"
+                            onclick="saveAlert()">
+
+                        Add Alert
+
+                    </button>
+
+
+                    <button
+                            class="cancel-btn"
+                            onclick="hideAlertForm()">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ALERT TABLE -->
+
             <div class="data-box">
 
                 <div id="alertList">
 
                     <div class="empty">
-
-                        Click "View Alerts"
-                        to load alert data.
-
+                        Click "Add Alert" or refresh to view alerts.
                     </div>
 
                 </div>
@@ -445,13 +769,10 @@
 
         </section>
 
-
     </main>
 
 </div>
 
-
-<!-- JavaScript -->
 
 <script src="script.js"></script>
 
